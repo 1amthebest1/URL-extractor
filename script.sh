@@ -14,8 +14,8 @@ extract_urls() {
   domain=$1
   output_file="${domain}.txt"
 
-  # Use grep to find URLs related to the domain and save only those starting with http or https
-  grep -Eo "(https?://$domain[^ ]*)" "$input_file" > "$output_file"
+  # Use grep to find URLs related to the domain and sed to remove trailing ]
+  grep -Eo "(https?://$domain[^ ]*)" "$input_file" | sed 's/\]$//' > "$output_file"
 
   # Check if the output file has content
   if [[ -s $output_file ]]; then
